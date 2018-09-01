@@ -29,8 +29,20 @@
 
 
 
-<?php include "include/header.php"; ?>
+<?php include "include/header.php";
 
+if(isset($_POST['send'])){
+	$name = $_POST['Name'];
+	$email = $_POST['email'];
+	$msg = $_POST['message'];
+	$date = date("d-m-Y");
+	$sql = "INSERT INTO msg (name, email, msg, history) VALUES ('$name','$email','$msg','$date')";
+		   // execute query
+		   mysqli_query($db, $sql);
+}
+
+?>
+<form method="POST">
 <div id="con"><Center>
 <div class="input_co">
 <input type="text" name="Name" placeholder="Your name">
@@ -40,3 +52,4 @@
 </div>
 <div class="btn-send"> <input type="submit" name="send" value="send"> </div>
 </div>
+</form>

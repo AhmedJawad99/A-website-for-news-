@@ -26,7 +26,9 @@
 			</div>
 		<?php endif  ?>
 
-
+<style>
+ #post{width:300px;}
+	</style>
 
 <?php include "include/header.php"; ?>
 <div id="all">
@@ -37,7 +39,7 @@ $db = mysqli_connect('localhost', 'root', '', 'news');
 
   
 
-  $results = mysqli_query($db, "SELECT * FROM post "); ?>
+  $results = mysqli_query($db, "SELECT * FROM post order by id DESC"); ?>
 
     <?php while ($row = mysqli_fetch_array($results)) { ?>
 
@@ -45,13 +47,13 @@ $db = mysqli_connect('localhost', 'root', '', 'news');
 		
                         <div id="post">
 
-                <center><div class="img"><img src="images/<?php echo $row['image']; ?>" width="100%"></div></center>
+                <?php if($row['image']==""){?><center><div class="img"><img src="images/no1.png" width="100%"></div></center><?php }else{?><center><div class="img"><img src="images/<?php echo $row['image']; ?>" width="100%"></div></center><?php } ?>
                 <div class="text-news">
-                <a href=""><center><h4><?php echo $row['title']; ?></h4></center></a>
+                <a href="news.php?id=<?php echo $row['id']; ?> "><center><h4><?php echo $row['title']; ?></h4></center></a>
 
                 <div>By : <a href="profile.php?username=<?php echo $row['username']; ?>"><?php echo $row['real_name']; ?></a></div>
-                <div>Date : <?php echo $row['date']; ?> / <?php echo $row['clock']; ?> GMT</div>
-                </div>
+                <div>Date :<?php echo $row['date']; ?> / <?php echo $row['clock']; ?> GMT</div>
+                </div></div>
 
   <?php } ?> 
 
